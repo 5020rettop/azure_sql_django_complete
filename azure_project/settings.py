@@ -25,7 +25,7 @@ SECRET_KEY = 'xzk$v$q2m1-^3b+^ck!6_hk4gmm$47c8zyzo@-o35spu*+shd$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "inc372-testapp-ewa9dddabkaaarcj.eastasia-01.azurewebsites.net"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
