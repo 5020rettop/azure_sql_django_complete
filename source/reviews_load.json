@@ -1,0 +1,17 @@
+[
+  { "product_id": 1, "user_id": 101, "rating": 5, "comment": "Excellent precision." },
+  { "product_id": 1, "user_id": 102, "rating": 4, "comment": "Good, but runs hot." },
+  { "product_id": 2, "user_id": 103, "rating": 2, "comment": "Sensor drifts after 24 hours." },
+  { "product_id": 2, "user_id": 104, "rating": 1, "comment": "Failed immediately." },
+  { "product_id": 3, "user_id": 105, "rating": 5, "comment": "Perfect form factor." },
+  { "product_id": 3, "user_id": 106, "rating": 5, "comment": "Solid connectivity." },
+  { "product_id": 4, "user_id": 107, "rating": 3, "comment": "Fast, but noisy fan." },
+  { "product_id": 5, "user_id": 108, "rating": 4, "comment": "Good torque for the price." },
+  { "product_id": 5, "user_id": 109, "rating": -5, "comment": "DANGEROUS! DO NOT BUY." },
+  { "product_id": 6, "user_id": 110, "rating": 5, "comment": "Beast of a machine." },
+  { "product_id": 7, "user_id": 111, "rating": 99, "comment": "SYSTEM ERROR GENERATED REVIEW." },
+  { "product_id": 8, "user_id": 112, "rating": 0, "comment": "It was free, can't complain?" },
+  { "product_id": 9, "user_id": 113, "rating": 5, "comment": "Keeps temps low." },
+  { "product_id": 9, "user_id": 114, "rating": 10, "comment": "Review bot spam." },
+  { "product_id": 10, "user_id": 115, "rating": 4, "comment": "Great for students." }
+]

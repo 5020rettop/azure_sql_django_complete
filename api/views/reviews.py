@@ -34,30 +34,44 @@ class ReviewList(APIView):
         return response.Response(reviews)
 
     def post(self, request):
-        # Create a new review
-        # Sample Data:
-        # {
-        #     "product_id": 1,
-        #     "user_id": 1,
-        #     "rating": 5,
-        #     "comment": "Great product!"
-        # }
+        # Create new review(s)
         db = get_db_handle()
         collection = db['reviews']
         
         data = request.data
-        review = {
-            'product_id': data.get('product_id'),
-            'user_id': data.get('user_id'),
-            'rating': data.get('rating'),
-            'comment': data.get('comment'),
-            'created_at': datetime.now().isoformat()
-        }
         
-        result = collection.insert_one(review)
-        review['_id'] = str(result.inserted_id)
-        
-        return response.Response(review, status=status.HTTP_201_CREATED)
+        if isinstance(data, list):
+            # Bulk upload
+            reviews = []
+            for item in data:
+                review = {
+                    'product_id': item.get('product_id'),
+                    'user_id': item.get('user_id'),
+                    'rating': item.get('rating'),
+                    'comment': item.get('comment'),
+                    'created_at': datetime.now().isoformat()
+                }
+                reviews.append(review)
+            
+            result = collection.insert_many(reviews)
+            for i, inserted_id in enumerate(result.inserted_ids):
+                reviews[i]['_id'] = str(inserted_id)
+            
+            return response.Response(reviews, status=status.HTTP_201_CREATED)
+        else:
+            # Single upload
+            review = {
+                'product_id': data.get('product_id'),
+                'user_id': data.get('user_id'),
+                'rating': data.get('rating'),
+                'comment': data.get('comment'),
+                'created_at': datetime.now().isoformat()
+            }
+            
+            result = collection.insert_one(review)
+            review['_id'] = str(result.inserted_id)
+            
+            return response.Response(review, status=status.HTTP_201_CREATED)
 
 class ReviewDetail(APIView):
     # API view to retrieve, update or delete a specific review from MongoDB
@@ -104,3 +118,11 @@ class ReviewDetail(APIView):
         if result.deleted_count > 0:
             return response.Response(status=status.HTTP_204_NO_CONTENT)
         return response.Response(status=status.HTTP_404_NOT_FOUND)
+
+class ReviewDeleteAll(APIView):
+    # API view to delete all reviews from MongoDB
+    def delete(self, request):
+        db = get_db_handle()
+        collection = db['reviews']
+        collection.delete_many({})
+        return response.Response(status=status.HTTP_204_NO_CONTENT)
