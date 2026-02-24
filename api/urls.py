@@ -16,7 +16,7 @@ urlpatterns = [
     path('orders/<int:pk>/', views.OrderDetail.as_view(), name='order-detail'),
     path('orders/deleteAll/', views.OrderDeleteAll.as_view(), name='order_delete_all'),
     path('reviews/', views.ReviewList.as_view(), name='review-list'),
-    path('reviews/<str:pk>/', views.ReviewDetail.as_view(), name='review-detail'),
     path('reviews/deleteAll/', views.ReviewDeleteAll.as_view(), name='review_delete_all'),
+    path('reviews/<str:pk>/', views.ReviewDetail.as_view(), name='review-detail'),
     path('connect-db/', views.check_db_connection, name='check-db'),
 ]
