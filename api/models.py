@@ -24,6 +24,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class Users(models.Model):
+    # Model representing a user profile
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.full_name
+
 class Order(models.Model):
     # Model representing a customer order
     STATUS_CHOICES = [
@@ -46,3 +55,16 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
+
+
+class Review(models.Model):
+    # Model representing a product review by a user
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.IntegerField()
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user.full_name} for {self.product.name}"
+
