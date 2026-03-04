@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, response, status
 from django.contrib.auth.models import User
 from ..models import Order
 from ..serializers import OrderSerializer
@@ -18,3 +18,9 @@ class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     # API view to retrieve, update, and delete orders
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+class OrderDeleteAll(generics.DestroyAPIView):
+    # API view to delete all orders
+    def delete(self, request, *args, **kwargs):
+        Order.objects.all().delete()
+        return response.Response(status=status.HTTP_204_NO_CONTENT)

@@ -11,9 +11,12 @@ urlpatterns = [
     path('products/deleteAll/', views.ProductDeleteAll.as_view(), name='product_delete_all'),
     path('users/', views.UserList.as_view(), name='user-list'),
     path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
+    path('users/deleteAll/', views.UserDeleteAll.as_view(), name='user_delete_all'),
     path('orders/', views.OrderList.as_view(), name='order-list'),
     path('orders/<int:pk>/', views.OrderDetail.as_view(), name='order-detail'),
+    path('orders/deleteAll/', views.OrderDeleteAll.as_view(), name='order_delete_all'),
     path('reviews/', views.ReviewList.as_view(), name='review-list'),
+    path('reviews/deleteAll/', views.ReviewDeleteAll.as_view(), name='review_delete_all'),
     path('reviews/<str:pk>/', views.ReviewDetail.as_view(), name='review-detail'),
     path('connect-db/', views.check_db_connection, name='check-db'),
 ]
